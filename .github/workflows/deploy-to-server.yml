@@ -23,4 +23,4 @@ jobs:
         npm ci --legacy-peer-deps
         npm run build
     - name: Run SFTP script
-      run: python ./.github/scripts/send_sftp '${{ vars.HOST_URL }}' '${{ secrets.FTP_USERNAME }}' '${{ secrets.FTP_PASSWORD }}' "prd"
+      run: python ./.github/scripts/send_sftp '${{ secrets.HOST_URL }}' '${{ secrets.FTP_USERNAME }}' '${{ secrets.FTP_PASSWORD }}' "prd"
