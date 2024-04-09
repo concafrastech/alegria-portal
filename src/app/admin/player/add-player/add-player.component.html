@@ -1,69 +1,150 @@
 <div class="mb-1 header">
   <span class="title-font">Novo álbum</span>
-  <button pButton icon="pi pi-arrow" class="p-button-secondary" (click)="goToInside('/admin/player')">
+  <button
+    pButton
+    icon="pi pi-arrow"
+    class="p-button-secondary"
+    (click)="goToInside('/admin/player')"
+  >
     <i class="material-icons left">arrow_back</i>Voltar
   </button>
 </div>
-<hr class="mb-1">
+<hr class="mb-1" />
+<div class="mb-2">
+  <p-messages></p-messages>
+</div>
 <div class="mt-4">
-  <form #addPlayer="ngForm" (ngSubmit)="onSubmit()" class="col s12">
-    <p-messages></p-messages>
-    <div class="row mb-2">
-      <div class="col-6">
-        <label for="name" class="form-label">Nome</label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="Digite o nome do álbum..."
-          #name="ngModel" [(ngModel)]="album.name">
-      </div>
-      <div class="col-6">
-        <label for="owner" class="form-label">Autor</label>
-        <input type="text" class="form-control" id="owner" name="owner" placeholder="Digite o autor do álbum..."
-          #owner="ngModel" [(ngModel)]="album.owner">
+  <div class="row mb-2">
+    <div class="col-6">
+      <div class="form-floating">
+        <input
+          type="text"
+          id="nameAlbum"
+          name="nameAlbum"
+          class="form-control"
+          [(ngModel)]="album.name"
+        />
+        <label for="nameAlbum">Nome</label>
       </div>
     </div>
-    <div class="row mb-2">
+    <div class="col-6">
+      <div class="form-floating">
+        <input
+          type="text"
+          id="ownerAlbum"
+          name="ownerAlbum"
+          class="form-control"
+          [(ngModel)]="album.owner"
+        />
+        <label for="ownerAlbum">Autor</label>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <div class="col-12">
+      <label for="link" class="form-label">Link para acesso dos arquivos</label>
+      <input
+        type="text"
+        class="form-control"
+        id="link"
+        name="link"
+        placeholder="Digite o link de acesso dos arquivos..."
+        #link="ngModel"
+        [(ngModel)]="album.link"
+      />
+    </div>
+  </div>
+  <div class="row">
+    <span class="sub-title-font">Músicas</span>
+  </div>
+  <div class="row">
+    <div class="col-12" *ngFor="let music of album.musics; let i = index">
+      <div class="dflex">
+        <span>Música #{{ i + 1 }}</span>
+        <button
+          pButton
+          pRipple
+          icon="pi pi-trash"
+          class="ms-2 p-button-rounded p-button-danger p-button-text"
+          (click)="this.removeMusic(i)"
+        ></button>
+      </div>
+      <div class="col-12 mb-1">
+        <label for="title{{ i }}" class="form-label"
+          >Link para acesso dos arquivos</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="title{{ i }}"
+          name="title{{ i }}"
+          placeholder="Digite o título da música..."
+          #title="ngModel"
+          [(ngModel)]="music.title"
+        />
+      </div>
+      <div class="col-12 mb-1">
+        <label for="artist{{ i }}" class="form-label">Artista</label>
+        <input
+          type="text"
+          class="form-control"
+          id="artist{{ i }}"
+          name="artist{{ i }}"
+          placeholder="Digite o nome do artista..."
+          #artist="ngModel"
+          [(ngModel)]="music.artist"
+        />
+      </div>
+      <div class="col-12 mb-1">
+        <label for="cover{{ i }}" class="form-label"
+          >Capa (link da imagem)</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="cover{{ i }}"
+          name="cover{{ i }}"
+          placeholder="Digite o link do arquivo da capa..."
+          #cover="ngModel"
+          [(ngModel)]="music.cover"
+          required
+        />
+      </div>
       <div class="col-12">
-        <label for="link" class="form-label">Link para acesso dos arquivos</label>
-        <input type="text" class="form-control" id="link" name="link"
-          placeholder="Digite o link de acesso dos arquivos..." #link="ngModel" [(ngModel)]="album.link">
+        <label for="file{{ i }}" class="form-label"
+          >Arquivo (link de acesso)</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="file{{ i }}"
+          name="file{{ i }}"
+          placeholder="Digite o link do arquivo da música..."
+          #file="ngModel"
+          [(ngModel)]="music.file"
+          required
+        />
       </div>
+      <hr />
     </div>
-    <div class="row">
-      <span class="sub-title-font">Músicas</span>
+    <div
+      class="mt-3 mb-3"
+      style="display: flex; justify-content: space-between"
+    >
+      <button
+        pButton
+        pRipple
+        type="button"
+        icon="pi pi-plus"
+        class="p-button-rounded p-button-secondary"
+        (click)="this.addMusic()"
+      ></button>
+      <button
+        pButton
+        icon="pi pi-check"
+        class="p-button-success"
+        label="Criar"
+      ></button>
     </div>
-    <div class="row">
-      <div class="col-12" *ngFor="let music of album.musics; let i = index">
-        <div class="dflex">
-          <span>Música #{{i+1}}</span>
-          <button pButton pRipple icon="pi pi-trash" class="ms-2 p-button-rounded p-button-danger p-button-text"
-            (click)="this.removeMusic(i)"></button>
-        </div>
-        <div class="col-12 mb-1">
-          <label for="title{{i}}" class="form-label">Link para acesso dos arquivos</label>
-          <input type="text" class="form-control" id="title{{i}}" name="title{{i}}"
-            placeholder="Digite o título da música..." #title="ngModel" [(ngModel)]="music.title">
-        </div>
-        <div class="col-12 mb-1">
-          <label for="artist{{i}}" class="form-label">Artista</label>
-          <input type="text" class="form-control" id="artist{{i}}" name="artist{{i}}"
-            placeholder="Digite o nome do artista..." #artist="ngModel" [(ngModel)]="music.artist">
-        </div>
-        <div class="col-12 mb-1">
-          <label for="cover{{i}}" class="form-label">Capa (link da imagem)</label>
-          <input type="text" class="form-control" id="cover{{i}}" name="cover{{i}}"
-            placeholder="Digite o link do arquivo da capa..." #cover="ngModel" [(ngModel)]="music.cover" required>
-        </div>
-        <div class="col-12">
-          <label for="file{{i}}" class="form-label">Arquivo (link de acesso)</label>
-          <input type="text" class="form-control" id="file{{i}}" name="file{{i}}"
-            placeholder="Digite o link do arquivo da música..." #file="ngModel" [(ngModel)]="music.file" required>
-        </div>
-        <hr>
-      </div>
-      <div class="mt-3 mb-3" style="display: flex; justify-content: space-between;">
-        <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded p-button-secondary"
-          (click)="this.addMusic()"></button>
-        <button pButton icon="pi pi-check" class="p-button-success" label="Criar"></button>
-      </div>
-    </div>
-  </form>
+  </div>
 </div>

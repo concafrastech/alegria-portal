@@ -16,7 +16,7 @@ export class AddPlayerComponent implements OnInit {
   constructor(
     private _albumService: AlbumService,
     private _messageService: MessageService,
-    private _router: Router
+    private _router: Router,
   ) {
     this.album = {
       name: '',

@@ -22,7 +22,7 @@ export class PlayerComponent implements OnInit {
     private _albumService: AlbumService,
     private _confirmationService: ConfirmationService,
     private _messageService: MessageService,
-    private _router: Router
+    private _router: Router,
   ) {
     this.albums = [];
   }
