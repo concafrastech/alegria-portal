@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <div class="mb-1 header">
   <span class="title-font">Novo álbum</span>
   <button
@@ -10,51 +11,45 @@
   </button>
 </div>
 <hr class="mb-1" />
-<div class="mb-2">
-  <p-messages></p-messages>
-</div>
 <div class="mt-4">
-  <div class="row mb-2">
+  <div class="row mb-2 pt-2">
     <div class="col-6">
-      <div class="form-floating">
+      <span class="p-float-label">
         <input
-          type="text"
+          pInputText
           id="nameAlbum"
-          name="nameAlbum"
-          class="form-control"
           [(ngModel)]="album.name"
+          class="w-100"
         />
-        <label for="nameAlbum">Nome</label>
-      </div>
+        <label htmlFor="nameAlbum">Nome</label>
+      </span>
     </div>
     <div class="col-6">
-      <div class="form-floating">
+      <span class="p-float-label">
         <input
-          type="text"
+          pInputText
           id="ownerAlbum"
-          name="ownerAlbum"
-          class="form-control"
           [(ngModel)]="album.owner"
+          class="w-100"
         />
-        <label for="ownerAlbum">Autor</label>
-      </div>
+        <label htmlFor="ownerAlbum">Autor</label>
+      </span>
     </div>
   </div>
-  <div class="row mb-2">
+  <div class="row mb-2 pt-4">
     <div class="col-12">
-      <label for="link" class="form-label">Link para acesso dos arquivos</label>
-      <input
-        type="text"
-        class="form-control"
-        id="link"
-        name="link"
-        placeholder="Digite o link de acesso dos arquivos..."
-        #link="ngModel"
-        [(ngModel)]="album.link"
-      />
+      <span class="p-float-label">
+        <input
+          pInputText
+          id="linkAlbum"
+          [(ngModel)]="album.link"
+          class="w-100"
+        />
+        <label htmlFor="linkAlbum">Link Download</label>
+      </span>
     </div>
   </div>
-  <div class="row">
+  <div class="row pt-4">
     <span class="sub-title-font">Músicas</span>
   </div>
   <div class="row">
@@ -69,61 +64,39 @@
           (click)="this.removeMusic(i)"
         ></button>
       </div>
-      <div class="col-12 mb-1">
-        <label for="title{{ i }}" class="form-label"
-          >Link para acesso dos arquivos</label
-        >
-        <input
-          type="text"
-          class="form-control"
-          id="title{{ i }}"
-          name="title{{ i }}"
-          placeholder="Digite o título da música..."
-          #title="ngModel"
-          [(ngModel)]="music.title"
-        />
+      <div class="col-12 mb-1 pt-3">
+        <span class="p-float-label">
+          <input
+            pInputText
+            id="title{{ i }}"
+            [(ngModel)]="music.title"
+            class="w-100"
+          />
+          <label htmlFor="title{{ i }}">Nome da música</label>
+        </span>
       </div>
-      <div class="col-12 mb-1">
-        <label for="artist{{ i }}" class="form-label">Artista</label>
-        <input
-          type="text"
-          class="form-control"
-          id="artist{{ i }}"
-          name="artist{{ i }}"
-          placeholder="Digite o nome do artista..."
-          #artist="ngModel"
-          [(ngModel)]="music.artist"
-        />
+      <div class="col-12 mb-1 pt-4">
+        <span class="p-float-label">
+          <input
+            pInputText
+            id="artist{{ i }}"
+            [(ngModel)]="music.artist"
+            class="w-100"
+          />
+          <label htmlFor="artist{{ i }}">Nome do artista</label>
+        </span>
       </div>
-      <div class="col-12 mb-1">
-        <label for="cover{{ i }}" class="form-label"
-          >Capa (link da imagem)</label
-        >
-        <input
-          type="text"
-          class="form-control"
-          id="cover{{ i }}"
-          name="cover{{ i }}"
-          placeholder="Digite o link do arquivo da capa..."
-          #cover="ngModel"
-          [(ngModel)]="music.cover"
-          required
-        />
+      <div class="col-12 mb-1 pt-2">
+        <label for="">Link Capa da Música</label>
+        <app-upload-files
+          (onDownloadUrlEmitter)="setFileCoverUrl($event, i)"
+        ></app-upload-files>
       </div>
       <div class="col-12">
-        <label for="file{{ i }}" class="form-label"
-          >Arquivo (link de acesso)</label
-        >
-        <input
-          type="text"
-          class="form-control"
-          id="file{{ i }}"
-          name="file{{ i }}"
-          placeholder="Digite o link do arquivo da música..."
-          #file="ngModel"
-          [(ngModel)]="music.file"
-          required
-        />
+        <label for="">Link da Música</label>
+        <app-upload-files
+          (onDownloadUrlEmitter)="setFileMusicUrl($event, i)"
+        ></app-upload-files>
       </div>
       <hr />
     </div>
@@ -144,6 +117,7 @@
         icon="pi pi-check"
         class="p-button-success"
         label="Criar"
+        (click)="onSubmit()"
       ></button>
     </div>
   </div>

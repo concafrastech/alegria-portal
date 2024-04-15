@@ -76,6 +76,14 @@ export class AddPlayerComponent implements OnInit {
     }
   }
 
+  setFileCoverUrl(info: any, index: any) {
+    this.album.musics[index].cover = info.url;
+  }
+
+  setFileMusicUrl(info: any, index: any) {
+    this.album.musics[index].file = info.url;
+  }
+
   goToInside(route: string, id: string = '') {
     if (id != '') {
       this._router.navigate([`${route}/${id}`]);

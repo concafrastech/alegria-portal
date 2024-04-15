@@ -21,6 +21,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { DropdownModule } from 'primeng/dropdown';
 import { TreeTableModule } from 'primeng/treetable';
 import { TreeModule } from 'primeng/tree';
+import { ToastModule } from 'primeng/toast';
 
 // Modules
 import { AppRoutingModule } from './app-routing.module';
@@ -100,6 +101,7 @@ import { PlayerAppComponent } from './player-app/player-app.component';
     DropdownModule,
     TreeTableModule,
     TreeModule,
+    ToastModule,
   ],
   providers: [AdminGuard],
   bootstrap: [AppComponent],
