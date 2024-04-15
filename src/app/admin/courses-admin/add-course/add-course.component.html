@@ -1,6 +1,11 @@
 <div class="mb-1 header">
   <span class="title-font">Novo curso</span>
-  <button pButton icon="pi pi-arrow" class="p-button-secondary" (click)="goToInside('/admin/courses')">
+  <button
+    pButton
+    icon="pi pi-arrow"
+    class="p-button-secondary"
+    (click)="goToInside('/admin/courses')"
+  >
     <i class="material-icons left">arrow_back</i>Voltar
   </button>
 </div>
@@ -12,8 +17,14 @@
   <div class="row mb-4">
     <div class="col-12">
       <div class="form-floating">
-        <input type="text" id="nameCourse" name="nameCourse" class="form-control" placeholder="Digite o nome..."
-          [(ngModel)]="course.name" />
+        <input
+          type="text"
+          id="nameCourse"
+          name="nameCourse"
+          class="form-control"
+          placeholder="Digite o nome..."
+          [(ngModel)]="course.name"
+        />
         <label for="nameCourse">Nome</label>
       </div>
     </div>
@@ -21,8 +32,15 @@
   <div class="row mb-4">
     <div class="col-12">
       <div class="form-floating">
-        <textarea id="descriptionCourse" name="descriptionCourse" class="form-control"
-          placeholder="Digite uma descrição..." [(ngModel)]="course.description" [rows]="5" [cols]="30"></textarea>
+        <textarea
+          id="descriptionCourse"
+          name="descriptionCourse"
+          class="form-control"
+          placeholder="Digite uma descrição..."
+          [(ngModel)]="course.description"
+          [rows]="5"
+          [cols]="30"
+        ></textarea>
         <label for="descriptionCourse">Descrição</label>
       </div>
     </div>
@@ -30,10 +48,17 @@
   <div class="row mb-4">
     <div class="col-12">
       <div class="form-floating">
-        <select id="categoryCourse" class="form-select" (change)="onChangeCategory($event)"
-          aria-label="Selecione a categoria">
+        <select
+          id="categoryCourse"
+          class="form-select"
+          (change)="onChangeCategory($event)"
+          aria-label="Selecione a categoria"
+        >
           <option selected>Selecione a categoria</option>
-          <option *ngFor="let category of categories" value="{{ category.code }}">
+          <option
+            *ngFor="let category of categories"
+            value="{{ category.code }}"
+          >
             {{ category.name }}
           </option>
         </select>
@@ -41,15 +66,25 @@
       </div>
     </div>
   </div>
-  <div *ngIf="
+  <div
+    *ngIf="
       course.category.code == 'concafras' || course.category.code == 'efas'
-    " class="row mb-4">
+    "
+    class="row mb-4"
+  >
     <div class="col-12">
       <div class="form-floating">
-        <select id="subcategoryCourse" class="form-select" (change)="onChangeSubcategory($event)"
-          aria-label="Selecione a categoria">
+        <select
+          id="subcategoryCourse"
+          class="form-select"
+          (change)="onChangeSubcategory($event)"
+          aria-label="Selecione a categoria"
+        >
           <option selected>Selecione a subcategoria</option>
-          <option *ngFor="let subcategory of subcategories" value="{{ subcategory.code }}">
+          <option
+            *ngFor="let subcategory of subcategories"
+            value="{{ subcategory.code }}"
+          >
             {{ subcategory.name }}
           </option>
         </select>
@@ -61,23 +96,43 @@
     <div class="col-12">
       <div class="align-center-vertical mb-2">
         <label class="form-label me-4">Arquivos</label>
-        <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded p-button-success"
-          (click)="addArchive()"></button>
+        <button
+          pButton
+          pRipple
+          type="button"
+          icon="pi pi-plus"
+          class="p-button-rounded p-button-success"
+          (click)="addArchive()"
+        ></button>
       </div>
       <ng-container *ngIf="course.archives != []">
         <div *ngFor="let archive of course.archives; let i = index">
           <div class="align-center-vertical mb-2">
             <label class="me-2">Arquivo #{{ i + 1 }}</label>
-            <button pButton pRipple type="button" icon="pi pi-trash"
-              class="p-button-rounded p-button-danger p-button-text" (click)="removeArchive(i)"></button>
+            <button
+              pButton
+              pRipple
+              type="button"
+              icon="pi pi-trash"
+              class="p-button-rounded p-button-danger p-button-text"
+              (click)="removeArchive(i)"
+            ></button>
           </div>
           <div class="form-floating mb-3">
-            <input type="text" id="nameArchive{{ i }}" name="nameArchive{{ i }}" class="form-control"
-              placeholder="Digite o nome do arquivo..." [(ngModel)]="archive.name" />
+            <input
+              type="text"
+              id="nameArchive{{ i }}"
+              name="nameArchive{{ i }}"
+              class="form-control"
+              placeholder="Digite o nome do arquivo..."
+              [(ngModel)]="archive.name"
+            />
             <label for="nameArchive{{ i }}">Nome do arquivo</label>
           </div>
           <div class="form-floating mb-3">
-            <app-upload-files (onDownloadUrlEmitter)="setFileDownloadUrl($event, i)"></app-upload-files>
+            <app-upload-files
+              (onDownloadUrlEmitter)="setFileDownloadUrl($event, i)"
+            ></app-upload-files>
           </div>
         </div>
       </ng-container>
@@ -86,7 +141,13 @@
   <div class="row mb-4">
     <div class="col-12">
       <div class="d-flex justify-content-end">
-        <button pButton icon="pi pi-check" class="p-button-success" label="Criar" (click)="onSubmit()"></button>
+        <button
+          pButton
+          icon="pi pi-check"
+          class="p-button-success"
+          label="Criar"
+          (click)="onSubmit()"
+        ></button>
       </div>
     </div>
   </div>

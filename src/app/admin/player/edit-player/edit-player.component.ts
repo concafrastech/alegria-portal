@@ -20,7 +20,7 @@ export class EditPlayerComponent implements OnInit {
     private _albumService: AlbumService,
     private _messageService: MessageService,
     private _router: Router,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
   ) {
     this.id = '';
     this.album = {
@@ -94,6 +94,14 @@ export class EditPlayerComponent implements OnInit {
         }, 5000);
       });
     }
+  }
+
+  setFileCoverUrl(info: any, index: any) {
+    this.album.musics[index].cover = info.url;
+  }
+
+  setFileMusicUrl(info: any, index: any) {
+    this.album.musics[index].file = info.url;
   }
 
   goToInside(route: string, id: string = '') {

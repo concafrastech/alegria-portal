@@ -16,7 +16,7 @@ export class AddPlayerComponent implements OnInit {
   constructor(
     private _albumService: AlbumService,
     private _messageService: MessageService,
-    private _router: Router
+    private _router: Router,
   ) {
     this.album = {
       name: '',
@@ -74,6 +74,14 @@ export class AddPlayerComponent implements OnInit {
         }, 5000);
       });
     }
+  }
+
+  setFileCoverUrl(info: any, index: any) {
+    this.album.musics[index].cover = info.url;
+  }
+
+  setFileMusicUrl(info: any, index: any) {
+    this.album.musics[index].file = info.url;
   }
 
   goToInside(route: string, id: string = '') {

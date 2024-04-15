@@ -39,7 +39,7 @@ export class HomeAdminComponent implements OnInit {
             routerLink: '/admin/kit',
           },
           {
-            label: 'Audio Player',
+            label: 'Audio Player (Álbuns)',
             icon: 'pi pi-fw pi-volume-up',
             routerLink: '/admin/player',
           },

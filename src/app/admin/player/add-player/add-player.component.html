@@ -1,69 +1,124 @@
+<p-toast></p-toast>
 <div class="mb-1 header">
   <span class="title-font">Novo álbum</span>
-  <button pButton icon="pi pi-arrow" class="p-button-secondary" (click)="goToInside('/admin/player')">
+  <button
+    pButton
+    icon="pi pi-arrow"
+    class="p-button-secondary"
+    (click)="goToInside('/admin/player')"
+  >
     <i class="material-icons left">arrow_back</i>Voltar
   </button>
 </div>
-<hr class="mb-1">
+<hr class="mb-1" />
 <div class="mt-4">
-  <form #addPlayer="ngForm" (ngSubmit)="onSubmit()" class="col s12">
-    <p-messages></p-messages>
-    <div class="row mb-2">
-      <div class="col-6">
-        <label for="name" class="form-label">Nome</label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="Digite o nome do álbum..."
-          #name="ngModel" [(ngModel)]="album.name">
-      </div>
-      <div class="col-6">
-        <label for="owner" class="form-label">Autor</label>
-        <input type="text" class="form-control" id="owner" name="owner" placeholder="Digite o autor do álbum..."
-          #owner="ngModel" [(ngModel)]="album.owner">
-      </div>
+  <div class="row mb-2 pt-2">
+    <div class="col-6">
+      <span class="p-float-label">
+        <input
+          pInputText
+          id="nameAlbum"
+          [(ngModel)]="album.name"
+          class="w-100"
+        />
+        <label htmlFor="nameAlbum">Nome</label>
+      </span>
     </div>
-    <div class="row mb-2">
+    <div class="col-6">
+      <span class="p-float-label">
+        <input
+          pInputText
+          id="ownerAlbum"
+          [(ngModel)]="album.owner"
+          class="w-100"
+        />
+        <label htmlFor="ownerAlbum">Autor</label>
+      </span>
+    </div>
+  </div>
+  <div class="row mb-2 pt-4">
+    <div class="col-12">
+      <span class="p-float-label">
+        <input
+          pInputText
+          id="linkAlbum"
+          [(ngModel)]="album.link"
+          class="w-100"
+        />
+        <label htmlFor="linkAlbum">Link Download</label>
+      </span>
+    </div>
+  </div>
+  <div class="row pt-4">
+    <span class="sub-title-font">Músicas</span>
+  </div>
+  <div class="row">
+    <div class="col-12" *ngFor="let music of album.musics; let i = index">
+      <div class="dflex">
+        <span>Música #{{ i + 1 }}</span>
+        <button
+          pButton
+          pRipple
+          icon="pi pi-trash"
+          class="ms-2 p-button-rounded p-button-danger p-button-text"
+          (click)="this.removeMusic(i)"
+        ></button>
+      </div>
+      <div class="col-12 mb-1 pt-3">
+        <span class="p-float-label">
+          <input
+            pInputText
+            id="title{{ i }}"
+            [(ngModel)]="music.title"
+            class="w-100"
+          />
+          <label htmlFor="title{{ i }}">Nome da música</label>
+        </span>
+      </div>
+      <div class="col-12 mb-1 pt-4">
+        <span class="p-float-label">
+          <input
+            pInputText
+            id="artist{{ i }}"
+            [(ngModel)]="music.artist"
+            class="w-100"
+          />
+          <label htmlFor="artist{{ i }}">Nome do artista</label>
+        </span>
+      </div>
+      <div class="col-12 mb-1 pt-2">
+        <label for="">Link Capa da Música</label>
+        <app-upload-files
+          (onDownloadUrlEmitter)="setFileCoverUrl($event, i)"
+        ></app-upload-files>
+      </div>
       <div class="col-12">
-        <label for="link" class="form-label">Link para acesso dos arquivos</label>
-        <input type="text" class="form-control" id="link" name="link"
-          placeholder="Digite o link de acesso dos arquivos..." #link="ngModel" [(ngModel)]="album.link">
+        <label for="">Link da Música</label>
+        <app-upload-files
+          (onDownloadUrlEmitter)="setFileMusicUrl($event, i)"
+        ></app-upload-files>
       </div>
+      <hr />
     </div>
-    <div class="row">
-      <span class="sub-title-font">Músicas</span>
+    <div
+      class="mt-3 mb-3"
+      style="display: flex; justify-content: space-between"
+    >
+      <button
+        pButton
+        pRipple
+        type="button"
+        icon="pi pi-plus"
+        class="p-button-rounded p-button-secondary"
+        (click)="this.addMusic()"
+      ></button>
+      <button
+        pButton
+        icon="pi pi-check"
+        class="p-button-success"
+        label="Criar"
+        (click)="onSubmit()"
+      ></button>
     </div>
-    <div class="row">
-      <div class="col-12" *ngFor="let music of album.musics; let i = index">
-        <div class="dflex">
-          <span>Música #{{i+1}}</span>
-          <button pButton pRipple icon="pi pi-trash" class="ms-2 p-button-rounded p-button-danger p-button-text"
-            (click)="this.removeMusic(i)"></button>
-        </div>
-        <div class="col-12 mb-1">
-          <label for="title{{i}}" class="form-label">Link para acesso dos arquivos</label>
-          <input type="text" class="form-control" id="title{{i}}" name="title{{i}}"
-            placeholder="Digite o título da música..." #title="ngModel" [(ngModel)]="music.title">
-        </div>
-        <div class="col-12 mb-1">
-          <label for="artist{{i}}" class="form-label">Artista</label>
-          <input type="text" class="form-control" id="artist{{i}}" name="artist{{i}}"
-            placeholder="Digite o nome do artista..." #artist="ngModel" [(ngModel)]="music.artist">
-        </div>
-        <div class="col-12 mb-1">
-          <label for="cover{{i}}" class="form-label">Capa (link da imagem)</label>
-          <input type="text" class="form-control" id="cover{{i}}" name="cover{{i}}"
-            placeholder="Digite o link do arquivo da capa..." #cover="ngModel" [(ngModel)]="music.cover" required>
-        </div>
-        <div class="col-12">
-          <label for="file{{i}}" class="form-label">Arquivo (link de acesso)</label>
-          <input type="text" class="form-control" id="file{{i}}" name="file{{i}}"
-            placeholder="Digite o link do arquivo da música..." #file="ngModel" [(ngModel)]="music.file" required>
-        </div>
-        <hr>
-      </div>
-      <div class="mt-3 mb-3" style="display: flex; justify-content: space-between;">
-        <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded p-button-secondary"
-          (click)="this.addMusic()"></button>
-        <button pButton icon="pi pi-check" class="p-button-success" label="Criar"></button>
-      </div>
-    </div>
-  </form>
+  </div>
 </div>

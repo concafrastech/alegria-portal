@@ -6,3 +6,7 @@ nav {
 .nav-link:hover {
   color: var(--light-yellow) !important;
 }
+
+.h-100 {
+  height: 100vh;
+}

@@ -1,6 +1,13 @@
 <p-messages></p-messages>
 <div class="mb-1 header">
-  <button pButton icon="pi pi-check" label="Novo Álbum" class="p-button-success" (click)="goToInside('/admin/player/add-player')"></button>
+  <span class="title-font">Audio Player (Álbuns)</span>
+  <button
+    pButton
+    icon="pi pi-check"
+    label="Novo Álbum"
+    class="p-button-success"
+    (click)="goToInside('/admin/player/add-player')"
+  ></button>
 </div>
 <hr class="mb-1" />
 <div class="mb-1">
@@ -18,13 +25,28 @@
         <td>{{ body.album.name }}</td>
         <td>{{ body.album.owner }}</td>
         <td>
-          <button pButton type="button" class="p-button-secondary" (click)="goTo(body.album.link)">
+          <button
+            pButton
+            type="button"
+            class="p-button-secondary"
+            (click)="goTo(body.album.link)"
+          >
             Acessar
           </button>
         </td>
         <td>
-          <button pButton class="me-1 p-button-warning" icon="pi pi-pencil" (click)="goToInside('/admin/player/edit-player', body.id)"></button>
-          <button pButton class="p-button-danger" icon="pi pi-trash" (click)="confirmDelete(body.id)"></button>
+          <button
+            pButton
+            class="me-1 p-button-warning"
+            icon="pi pi-pencil"
+            (click)="goToInside('/admin/player/edit-player', body.id)"
+          ></button>
+          <button
+            pButton
+            class="p-button-danger"
+            icon="pi pi-trash"
+            (click)="confirmDelete(body.id)"
+          ></button>
         </td>
       </tr>
     </ng-template>
@@ -37,4 +59,4 @@
 </ngx-spinner>
 
 <!-- Dialog delete album-->
-<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+<p-confirmDialog [style]="{ width: '50vw' }"></p-confirmDialog>
