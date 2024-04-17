@@ -91,6 +91,27 @@
             />
           </div>
         </div>
+        <div class="row">
+          <div class="btn-group" role="group" aria-label="Controls">
+            <button
+              type="button"
+              class="btn btn-player-controls d-flex justify-content-center align-items-center"
+              (click)="goTo('/')"
+            >
+              <i class="material-icons"> home </i>
+              Tela inicial
+            </button>
+            <a
+              type="button"
+              class="btn btn-player-controls d-flex justify-content-center align-items-center"
+              [href]="this.music.file"
+              [download]="this.music.title.replaceAll(' ', '-') + '.mp3'"
+            >
+              <i class="material-icons"> download </i>
+              Baixar música
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
