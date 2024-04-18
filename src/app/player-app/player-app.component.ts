@@ -4,7 +4,7 @@ import { AlbumService } from '../services/album.service';
 import { Album } from '../models/album';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
-import storage from '../services/firebase/firebase-storage.service';
+import { FileSaverService } from 'ngx-filesaver';
 
 @Component({
   selector: 'app-player-app',
@@ -29,6 +29,7 @@ export class PlayerAppComponent implements OnInit {
 
   constructor(
     private _albumService: AlbumService,
+    private _fileSaverService: FileSaverService,
     private _spinner: NgxSpinnerService,
     private _router: Router,
   ) {
@@ -179,8 +180,9 @@ export class PlayerAppComponent implements OnInit {
     this._router.navigate([route]);
   }
 
-  download() {
-    console.log(storage.refFromURL(this.music.file).getDownloadURL());
-    // this.audioElement.pa
+  downloadFile() {
+    let blob = fetch(this.music.file).then((r) => r.blob());
+    console.log(blob);
+    // this._fileSaverService.save(this.music.file);
   }
 }

@@ -102,9 +102,12 @@
               Tela inicial
             </button>
             <button
+              fileSaver
               type="button"
               class="btn btn-player-controls d-flex justify-content-center align-items-center"
-              (click)="download()"
+              [method]="'GET'"
+              [fileName]="this.music.title.trim().replaceAll(' ', '-') + '.mp3'"
+              [url]="this.music.file"
             >
               <i class="material-icons"> download </i>
               Baixar música

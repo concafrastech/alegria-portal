@@ -23,6 +23,9 @@ import { TreeTableModule } from 'primeng/treetable';
 import { TreeModule } from 'primeng/tree';
 import { ToastModule } from 'primeng/toast';
 
+// Libs
+import { FileSaverModule } from 'ngx-filesaver';
+
 // Modules
 import { AppRoutingModule } from './app-routing.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -102,6 +105,7 @@ import { PlayerAppComponent } from './player-app/player-app.component';
     TreeTableModule,
     TreeModule,
     ToastModule,
+    FileSaverModule,
   ],
   providers: [AdminGuard],
   bootstrap: [AppComponent],
