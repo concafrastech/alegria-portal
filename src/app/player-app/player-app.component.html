@@ -101,15 +101,14 @@
               <i class="material-icons"> home </i>
               Tela inicial
             </button>
-            <a
+            <button
               type="button"
               class="btn btn-player-controls d-flex justify-content-center align-items-center"
-              [href]="this.music.file"
-              [download]="this.music.title.replaceAll(' ', '-') + '.mp3'"
+              (click)="download()"
             >
               <i class="material-icons"> download </i>
               Baixar música
-            </a>
+            </button>
           </div>
         </div>
       </div>

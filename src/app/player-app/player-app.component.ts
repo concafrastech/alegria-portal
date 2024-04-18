@@ -4,6 +4,7 @@ import { AlbumService } from '../services/album.service';
 import { Album } from '../models/album';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
+import storage from '../services/firebase/firebase-storage.service';
 
 @Component({
   selector: 'app-player-app',
@@ -179,6 +180,7 @@ export class PlayerAppComponent implements OnInit {
   }
 
   download() {
+    console.log(storage.refFromURL(this.music.file).getDownloadURL());
     // this.audioElement.pa
   }
 }
