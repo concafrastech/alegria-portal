@@ -101,7 +101,8 @@ export class EditPlayerComponent implements OnInit {
   }
 
   setFileMusicUrl(info: any, index: any) {
-    this.album.musics[index].file = info.url;
+    this.album.musics[index].title = info.name.split('.')[0];
+    this.album.musics[index].file = `${info.name}|${info.url}`;
   }
 
   goToInside(route: string, id: string = '') {

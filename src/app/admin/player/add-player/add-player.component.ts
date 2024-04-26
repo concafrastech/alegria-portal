@@ -32,7 +32,8 @@ export class AddPlayerComponent implements OnInit {
     this.album.musics.push({
       title: '',
       artist: '',
-      cover: '',
+      cover:
+        'https://firebasestorage.googleapis.com/v0/b/alegriatech-2bf22.appspot.com/o/downloads%2Fmusicas%2Fcapa_albums%2Fcapa_album_default.jpg?alt=media&token=3938e1d0-33b6-46b7-a605-2396313d7f0a',
       file: '',
     });
   }
@@ -81,7 +82,8 @@ export class AddPlayerComponent implements OnInit {
   }
 
   setFileMusicUrl(info: any, index: any) {
-    this.album.musics[index].file = info.url;
+    this.album.musics[index].title = info.name.split('.')[0];
+    this.album.musics[index].file = `${info.name}|${info.url}`;
   }
 
   goToInside(route: string, id: string = '') {
