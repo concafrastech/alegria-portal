@@ -3,6 +3,9 @@ import { Music } from '../models/music';
 import { AlbumService } from '../services/album.service';
 import { Album } from '../models/album';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Router } from '@angular/router';
+import storage from '../services/firebase/firebase-storage.service';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-player-app',
@@ -28,6 +31,7 @@ export class PlayerAppComponent implements OnInit {
   constructor(
     private _albumService: AlbumService,
     private _spinner: NgxSpinnerService,
+    private _router: Router,
   ) {
     this.music = {
       title: '',
@@ -127,7 +131,7 @@ export class PlayerAppComponent implements OnInit {
   update() {
     this.currentTime = 0;
     this.music = this.currentAlbum.musics[this.index];
-    this.audioElement.src = this.music.file;
+    this.audioElement.src = this.music.file.split('|')[1];
   }
 
   restart() {
@@ -170,5 +174,21 @@ export class PlayerAppComponent implements OnInit {
     let minutes = Math.floor(time / 60);
     let seconds = Math.floor(time % 60);
     return `${('0' + minutes).slice(-2)}:${('0' + seconds).slice(-2)}`;
+  }
+
+  goTo(route: string) {
+    this._router.navigate([route]);
+  }
+
+  downloadFile() {
+    let fileName = this.music.file.split('|')[0];
+    storage
+      .ref(`downloads/musicas/${fileName}`)
+      .getDownloadURL()
+      .then((url) => {
+        fetch(url)
+          .then((res) => res.blob())
+          .then((blob) => saveAs(blob, fileName));
+      });
   }
 }

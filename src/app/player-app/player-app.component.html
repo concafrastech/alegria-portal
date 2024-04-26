@@ -91,6 +91,26 @@
             />
           </div>
         </div>
+        <div class="row">
+          <div class="btn-group" role="group" aria-label="Controls">
+            <button
+              type="button"
+              class="btn btn-player-controls d-flex justify-content-center align-items-center"
+              (click)="goTo('/')"
+            >
+              <i class="material-icons"> home </i>
+              Tela inicial
+            </button>
+            <button
+              type="button"
+              class="btn btn-player-controls d-flex justify-content-center align-items-center"
+              (click)="downloadFile()"
+            >
+              <i class="material-icons"> download </i>
+              Baixar música
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -14,7 +14,8 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "allowedCommonJsDependencies": [
-              "sha.js"
+              "sha.js",
+              "file-saver"
             ],
             "outputPath": "dist/alegria-portal",
             "index": "src/index.html",
