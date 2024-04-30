@@ -1,158 +1,120 @@
 <div class="container pt-default">
   <div
-    *ngIf="coursesConcafras.length <= 0 && coursesEfas.length <= 0 && coursesNfed.length <= 0 && coursesNfofiq.length <= 0">
+    *ngIf="
+      coursesConcafras.length <= 0 &&
+      coursesEfas.length <= 0 &&
+      coursesNfed.length <= 0 &&
+      coursesNfofiq.length <= 0
+    "
+  >
     <h1 class="display-3">Sem cursos cadastrados ainda.</h1>
   </div>
   <div class="mb-5" *ngIf="coursesConcafras.length > 0">
     <h1 class="display-3">CONCAFRAS</h1>
-    <p-table [value]="coursesConcafras" dataKey="name" [tableStyle]="{'min-width': '60rem'}">
-      <ng-template pTemplate="header">
-        <tr>
-          <th style="width: 5rem"></th>
-          <th pSortableColumn="name">Nome <p-sortIcon field="name"></p-sortIcon></th>
-          <th pSortableColumn="description">Descrição <p-sortIcon field="description"></p-sortIcon></th>
-          <th pSortableColumn="subcategory">SubCategoria <p-sortIcon field="subcategory"></p-sortIcon></th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-course let-expanded="expanded">
-        <tr>
-          <td>
-            <button type="button" pButton pRipple [pRowToggler]="course"
-              class="p-button-text p-button-rounded p-button-plain"
-              [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
-          </td>
-          <td>{{course.name}}</td>
-          <td>{{course.description}}</td>
-          <td>{{course.category.subcategory.name}}</td>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="rowexpansion" let-course>
-        <tr>
-          <td colspan="7">
-            <div class="p-3">
-              <div class="row container" *ngFor="let archive of course.archives">
-                <button pButton pRipple type="button" icon="pi pi-download" label="{{archive.name}}"
-                  class="p-button-raised p-button-success m-2" (click)="downloadArchive(archive.url)"></button>
-              </div>
+    <div class="d-flex gap-4 flex-wrap">
+      <ng-container *ngFor="let course of coursesConcafras">
+        <p-card header="{{ course.name }}" [style]="{ width: '360px' }">
+          <p>
+            {{ course.description }}
+          </p>
+          <small>{{ course.category.subcategory.name }}</small>
+          <ng-template pTemplate="footer">
+            <div class="row container" *ngFor="let archive of course.archives">
+              <button
+                pButton
+                pRipple
+                type="button"
+                icon="pi pi-download"
+                label="{{ archive.name }}"
+                class="p-button-raised p-button-success m-2"
+                (click)="downloadArchive(archive.url)"
+              ></button>
             </div>
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>
+          </ng-template>
+        </p-card>
+      </ng-container>
+    </div>
   </div>
   <div class="mb-5" *ngIf="coursesEfas.length > 0">
-    <hr>
+    <hr />
     <h1 class="display-3">Encontro Fraterno Auta de Souza</h1>
-    <p-table [value]="coursesEfas" dataKey="name" [tableStyle]="{'min-width': '60rem'}">
-      <ng-template pTemplate="header">
-        <tr>
-          <th style="width: 5rem"></th>
-          <th pSortableColumn="name">Nome <p-sortIcon field="name"></p-sortIcon></th>
-          <th pSortableColumn="description">Descrição <p-sortIcon field="description"></p-sortIcon></th>
-          <th pSortableColumn="subcategory">SubCategoria <p-sortIcon field="subcategory"></p-sortIcon></th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-course let-expanded="expanded">
-        <tr>
-          <td>
-            <button type="button" pButton pRipple [pRowToggler]="course"
-              class="p-button-text p-button-rounded p-button-plain"
-              [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
-          </td>
-          <td>{{course.name}}</td>
-          <td>{{course.description}}</td>
-          <td>{{course.category.subcategory.name}}</td>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="rowexpansion" let-course>
-        <tr>
-          <td colspan="7">
-            <div class="p-3">
-              <div class="row container" *ngFor="let archive of course.archives">
-                <button pButton pRipple type="button" icon="pi pi-download" label="{{archive.name}}"
-                  class="p-button-raised p-button-success" (click)="downloadArchive(archive.url)"></button>
-              </div>
+    <div class="d-flex gap-4 flex-wrap">
+      <ng-container *ngFor="let course of coursesEfas">
+        <p-card header="{{ course.name }}" [style]="{ width: '360px' }">
+          <p>
+            {{ course.description }}
+          </p>
+          <small>{{ course.category.subcategory.name }}</small>
+          <ng-template pTemplate="footer">
+            <div class="row container" *ngFor="let archive of course.archives">
+              <button
+                pButton
+                pRipple
+                type="button"
+                icon="pi pi-download"
+                label="{{ archive.name }}"
+                class="p-button-raised p-button-success m-2"
+                (click)="downloadArchive(archive.url)"
+              ></button>
             </div>
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>
+          </ng-template>
+        </p-card>
+      </ng-container>
+    </div>
   </div>
   <div class="mb-5" *ngIf="coursesNfed.length > 0">
-    <hr>
+    <hr />
     <h1 class="display-3">Núcleo de Formação - Teórico</h1>
-    <p-table [value]="coursesNfed" dataKey="name" [tableStyle]="{'min-width': '60rem'}">
-      <ng-template pTemplate="header">
-        <tr>
-          <th style="width: 5rem"></th>
-          <th pSortableColumn="name">Nome <p-sortIcon field="name"></p-sortIcon></th>
-          <th pSortableColumn="description">Descrição <p-sortIcon field="description"></p-sortIcon></th>
-          <th pSortableColumn="subcategory">SubCategoria <p-sortIcon field="subcategory"></p-sortIcon></th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-course let-expanded="expanded">
-        <tr>
-          <td>
-            <button type="button" pButton pRipple [pRowToggler]="course"
-              class="p-button-text p-button-rounded p-button-plain"
-              [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
-          </td>
-          <td>{{course.name}}</td>
-          <td>{{course.description}}</td>
-          <td>{{course.category.subcategory.name}}</td>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="rowexpansion" let-course>
-        <tr>
-          <td colspan="7">
-            <div class="p-3">
-              <div class="row container" *ngFor="let archive of course.archives">
-                <button pButton pRipple type="button" icon="pi pi-download" label="{{archive.name}}"
-                  class="p-button-raised p-button-success" (click)="downloadArchive(archive.url)"></button>
-              </div>
+    <div class="d-flex gap-4 flex-wrap">
+      <ng-container *ngFor="let course of coursesNfed">
+        <p-card header="{{ course.name }}" [style]="{ width: '360px' }">
+          <p>
+            {{ course.description }}
+          </p>
+          <small>{{ course.category.subcategory.name }}</small>
+          <ng-template pTemplate="footer">
+            <div class="row container" *ngFor="let archive of course.archives">
+              <button
+                pButton
+                pRipple
+                type="button"
+                icon="pi pi-download"
+                label="{{ archive.name }}"
+                class="p-button-raised p-button-success m-2"
+                (click)="downloadArchive(archive.url)"
+              ></button>
             </div>
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>
+          </ng-template>
+        </p-card>
+      </ng-container>
+    </div>
   </div>
   <div class="mb-5" *ngIf="coursesNfofiq.length > 0">
-    <hr>
+    <hr />
     <h1 class="display-3">Núcleo de Formação - Oficinas</h1>
-    <p-table [value]="coursesNfofiq" dataKey="name" [tableStyle]="{'min-width': '60rem'}">
-      <ng-template pTemplate="header">
-        <tr>
-          <th style="width: 5rem"></th>
-          <th pSortableColumn="name">Nome <p-sortIcon field="name"></p-sortIcon></th>
-          <th pSortableColumn="description">Descrição <p-sortIcon field="description"></p-sortIcon></th>
-          <th pSortableColumn="subcategory">SubCategoria <p-sortIcon field="subcategory"></p-sortIcon></th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-course let-expanded="expanded">
-        <tr>
-          <td>
-            <button type="button" pButton pRipple [pRowToggler]="course"
-              class="p-button-text p-button-rounded p-button-plain"
-              [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
-          </td>
-          <td>{{course.name}}</td>
-          <td>{{course.description}}</td>
-          <td>{{course.category.subcategory.name}}</td>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="rowexpansion" let-course>
-        <tr>
-          <td colspan="7">
-            <div class="p-3">
-              <div class="row container" *ngFor="let archive of course.archives">
-                <button pButton pRipple type="button" icon="pi pi-download" label="{{archive.name}}"
-                  class="p-button-raised p-button-success" (click)="downloadArchive(archive.url)"></button>
-              </div>
+    <div class="d-flex gap-4 flex-wrap">
+      <ng-container *ngFor="let course of coursesNfofiq">
+        <p-card header="{{ course.name }}" [style]="{ width: '360px' }">
+          <p>
+            {{ course.description }}
+          </p>
+          <small>{{ course.category.subcategory.name }}</small>
+          <ng-template pTemplate="footer">
+            <div class="row container" *ngFor="let archive of course.archives">
+              <button
+                pButton
+                pRipple
+                type="button"
+                icon="pi pi-download"
+                label="{{ archive.name }}"
+                class="p-button-raised p-button-success m-2"
+                (click)="downloadArchive(archive.url)"
+              ></button>
             </div>
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>
+          </ng-template>
+        </p-card>
+      </ng-container>
+    </div>
   </div>
 </div>
 
