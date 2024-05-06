@@ -1,38 +1,66 @@
 <div class="block-content pt-default">
   <!-- <img class="background-img-logo" src="assets/img/logo/logo.svg" alt="Logo Alegria" srcset=""> -->
   <div class="container div-login">
-    <p-card header="Acesse o portal" styleClass="text-center" [style]="{'width': '80%', 'margin': '0 auto'}">
+    <p-card
+      header="Acesse o portal"
+      styleClass="text-center"
+      [style]="{ width: '80%', margin: '0 auto' }"
+    >
       <ng-template pTemplate="body">
         <p-messages></p-messages>
-        <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+        <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
           <div class="col-12 col-md-12 mt-5 mb-5 text-left">
             <span class="p-float-label">
-              <input id="email" type="email" class="form-control font-default" name="email"
-                placeholder="Digite seu email..." pInputText [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
+              <input
+                id="email"
+                type="email"
+                class="form-control font-default"
+                name="email"
+                placeholder="Digite seu email..."
+                pInputText
+                [(ngModel)]="email"
+                [ngModelOptions]="{ standalone: true }"
+              />
               <label for="email">E-mail</label>
             </span>
           </div>
           <div class="col-12 col-md-12 mt-5 mb-5 text-left">
             <span class="p-float-label">
-              <p-password inputId="pass" [(ngModel)]="password" [feedback]="false" [toggleMask]="true"
-                placeholder="Digite sua senha..." [style]="{'width': '100%'}"
-                [ngModelOptions]="{standalone: true}"></p-password>
-              <label for="pass">Senha</label>
+              <p-password
+                inputId="pass"
+                [(ngModel)]="password"
+                [feedback]="false"
+                [toggleMask]="true"
+                placeholder="Digite sua senha..."
+                [style]="{ width: '100%' }"
+                [ngModelOptions]="{ standalone: true }"
+              ></p-password>
+              <label>Senha</label>
             </span>
           </div>
           <div class="col-12 col-md-12 mt-3">
             <div>
-              <p-button type="submit" label="Entrar" styleClass="font-default p-button-lg"></p-button>
+              <p-button
+                type="submit"
+                label="Entrar"
+                styleClass="font-default p-button-lg"
+              ></p-button>
               <!-- <button type="submit" class="btn btn-lg btn-primary btn-login">Entrar</button> -->
             </div>
             <div class="mt-2">
-              <p-button [routerLink]="'/register'" styleClass="font-default p-button-link p-button-sm"
-                label="Não tem um perfil? Crie ele aqui!"></p-button>
+              <p-button
+                [routerLink]="'/register'"
+                styleClass="font-default p-button-link p-button-sm"
+                label="Não tem um perfil? Crie ele aqui!"
+              ></p-button>
               <!-- <a class="link-register" [routerLink]="'/register'">Não tem um perfil? Crie ele aqui!</a> -->
             </div>
             <div>
-              <p-button (click)="showModalDialog()" styleClass="font-default p-button-link p-button-sm"
-                label="Esqueceu sua senha?"></p-button>
+              <p-button
+                (click)="showModalDialog()"
+                styleClass="font-default p-button-link p-button-sm"
+                label="Esqueceu sua senha?"
+              ></p-button>
             </div>
           </div>
         </form>
@@ -41,16 +69,37 @@
   </div>
 </div>
 
-<p-dialog header="Esqueceu sua senha?" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}"
-  [draggable]="false" [resizable]="false" styleClass="font-default">
+<p-dialog
+  header="Esqueceu sua senha?"
+  [(visible)]="displayModal"
+  [modal]="true"
+  [style]="{ width: '50vw' }"
+  [draggable]="false"
+  [resizable]="false"
+  styleClass="font-default"
+>
   <p class="m-0">Informa seu e-mail cadastrado:</p>
-  <input type="email" pInputText [(ngModel)]="recoverEmail" class="w-100" placeholder="Digite seu e-mail...">
+  <input
+    type="email"
+    pInputText
+    [(ngModel)]="recoverEmail"
+    class="w-100"
+    placeholder="Digite seu e-mail..."
+  />
   <ng-template pTemplate="footer">
-    <p-button icon="pi pi-check" (click)="sendEmailRecoverPassword()" label="Enviar"
-      styleClass="p-button-text"></p-button>
+    <p-button
+      icon="pi pi-check"
+      (click)="sendEmailRecoverPassword()"
+      label="Enviar"
+      styleClass="p-button-text"
+    ></p-button>
   </ng-template>
 </p-dialog>
 
-<ngx-spinner bdColor="rgba(51,51,51,0.8)" color="#fff" type="ball-scale-multiple">
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  color="#fff"
+  type="ball-scale-multiple"
+>
   <p style="font-size: 20px; color: white">Carregando...</p>
 </ngx-spinner>
