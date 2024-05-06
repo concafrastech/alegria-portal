@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     private _userService: UserService,
     private _messageService: MessageService,
     private _spinner: NgxSpinnerService,
-    private _router: Router
+    private _router: Router,
   ) {
     this.errorFlag = false;
     this.displayModal = false;
@@ -40,20 +40,35 @@ export class LoginComponent implements OnInit {
   sendEmailRecoverPassword() {
     this._spinner.show();
     if (this.recoverEmail != '') {
-      auth.sendPasswordResetEmail(this.recoverEmail).then(() => {
-        this.displayModal = false;
-        this._messageService.add({
-          severity: 'success',
-          summary: 'E-mail enviado',
-          detail:
-            'Verifique sua caixa de e-mail pelo link de recuperação de senha.',
+      auth
+        .sendPasswordResetEmail(this.recoverEmail)
+        .then(() => {
+          this._messageService.add({
+            severity: 'success',
+            summary: 'E-mail enviado',
+            detail:
+              'Verifique sua caixa de e-mail pelo link de recuperação de senha.',
+          });
+        })
+        .catch((error: any) => {
+          if (error.code == 'auth/user-not-found') {
+            this._messageService.add({
+              severity: 'error',
+              summary: 'Usuário não encontrado',
+              detail:
+                'Verifique se digitou seu e-mail certo ou realize um novo cadastro.',
+            });
+          }
+        })
+        .finally(() => {
+          this.displayModal = false;
+          this.recoverEmail = '';
+          this._spinner.hide();
         });
-        this._spinner.hide();
-      });
     }
   }
 
-  onSubmit(form: any) {
+  onSubmit() {
     this._spinner.show();
 
     if (this.email != '' && this.password != '') {
