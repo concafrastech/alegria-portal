@@ -107,4 +107,8 @@ export class SpaceJoyComponent implements OnInit {
       this.currentContent = this.contentsKit[year];
     }
   }
+
+  goTo(url: any) {
+    window.location = url;
+  }
 }
