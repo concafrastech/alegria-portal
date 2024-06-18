@@ -4,7 +4,7 @@
     <i class="material-icons left">arrow_back</i>Voltar
   </button>
 </div>
-<hr class="mb-1" />
+<hr class="mb-1"/>
 <div class="mb-2">
   <p-messages></p-messages>
 </div>
@@ -13,14 +13,14 @@
     <div class="col-6">
       <div class="form-floating">
         <input type="text" id="nameKit" name="nameKit" class="form-control" placeholder="Digite o nome..."
-          [(ngModel)]="kit.name" />
+               [(ngModel)]="kit.name"/>
         <label for="nameKit">Nome</label>
       </div>
     </div>
     <div class="col-6">
       <div class="form-floating">
         <input type="number" id="yearKit" name="yearKit" class="form-control" placeholder="Digite o ano..."
-          [(ngModel)]="kit.year" />
+               [(ngModel)]="kit.year"/>
         <label for="yearKit">Ano</label>
       </div>
     </div>
@@ -29,7 +29,7 @@
     <div class="col-12">
       <div class="form-floating">
         <textarea id="descriptionKit" name="descriptionKit" class="form-control" placeholder="Digite uma descrição..."
-          [(ngModel)]="kit.description" [rows]="5" [cols]="30"></textarea>
+                  [(ngModel)]="kit.description" [rows]="5" [cols]="30"></textarea>
         <label for="descriptionKit">Descrição</label>
       </div>
     </div>
@@ -38,23 +38,25 @@
     <div class="col-12">
       <div class="align-center-vertical mb-2">
         <label class="form-label me-4">Arquivos</label>
-        <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded p-button-success"
-          (click)="addArchive()"></button>
+        <button *ngIf="kit.archives.length == 0" pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded p-button-success"
+                (click)="addArchive()"></button>
       </div>
       <ng-container *ngIf="kit.archives != []">
         <div *ngFor="let archive of kit.archives; let i = index">
           <div class="align-center-vertical mb-2">
             <label class="me-2">Arquivo #{{ i + 1 }}</label>
             <button pButton pRipple type="button" icon="pi pi-trash"
-              class="p-button-rounded p-button-danger p-button-text" (click)="removeArchive(i)"></button>
+                    class="p-button-rounded p-button-danger p-button-text" (click)="removeArchive(i)"></button>
           </div>
           <div class="form-floating mb-3">
             <input type="text" id="nameArchive{{ i }}" name="nameArchive{{ i }}" class="form-control"
-              placeholder="Digite o nome do arquivo..." [(ngModel)]="archive.name" />
+                   placeholder="Digite o nome do arquivo..." [(ngModel)]="archive.name"/>
             <label for="nameArchive{{ i }}">Nome do arquivo</label>
           </div>
           <div class="form-floating mb-3">
-            <app-upload-files (onDownloadUrlEmitter)="setFileDownloadUrl($event, i)"></app-upload-files>
+            <input type="text" id="nameArchive{{ i }}" name="urlArchive{{ i }}" class="form-control"
+                   placeholder="Digite a url do arquivo..." [(ngModel)]="archive.url"/>
+            <label for="urlArchive{{ i }}">Url do arquivo</label>
           </div>
         </div>
       </ng-container>

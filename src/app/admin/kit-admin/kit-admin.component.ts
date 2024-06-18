@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {NgxSpinnerService} from 'ngx-spinner';
 import {
   ConfirmEventType,
   ConfirmationService,
   MessageService,
 } from 'primeng/api';
-import { Kit } from 'src/app/models/kit';
-import { KitService } from 'src/app/services/kit.service';
+import {Kit} from 'src/app/models/kit';
+import {KitService} from 'src/app/services/kit.service';
 
 @Component({
   selector: 'app-kit-admin',
@@ -29,8 +29,9 @@ export class KitAdminComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._spinner.show();
-    this.getKits();
+    this._spinner.show().then(() => {
+      this.getKits();
+    });
   }
 
   getKit() {
@@ -40,12 +41,14 @@ export class KitAdminComponent implements OnInit {
   getKits() {
     this._kitService.getKits().subscribe({
       next: (kits: any) => {
-        this._spinner.hide();
-        this.kits = kits.data;
+        this._spinner.hide().then(() => {
+          this.kits = kits.data;
+        });
       },
       error: (error) => {
-        this._spinner.hide();
-        console.log(`[ERROR] ${error}`);
+        this._spinner.hide().then(() => {
+          console.log(`[ERROR] ${error}`);
+        });
       },
     });
   }
